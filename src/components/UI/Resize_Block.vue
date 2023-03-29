@@ -16,7 +16,7 @@ export default {
   data(){
     return{X: 0, Y: 0, height_block: 0, width_block: 0,direction: "", margin_bottom: 0, margin_left: 0, margin_right: 0, margin_top: 0,click: false}
   },
-  props:['id'],
+  props:['id'],#f26b31
   mounted() {
     this.$el.setAttribute('id', 'block' + this.id)
   },

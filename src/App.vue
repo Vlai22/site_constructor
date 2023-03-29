@@ -19,7 +19,7 @@ export default {
   data () {
     return{ props:{NameFile:"Test"},
       components:[
-        {id:1, name: "Section_Block", elements:[{id:1, name:"Text_2_Component"}],
+        {id:1, name: "Section_Block", elements:[{id:1, name:"Text_1_Component"}],
         }
       ],
     }
