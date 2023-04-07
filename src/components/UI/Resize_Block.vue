@@ -3,10 +3,14 @@
       <div @mousedown="click_in_block('up')" @mouseup="up_in_block" class="up"></div>
       <div @mousedown="click_in_block('left')" @mouseup="up_in_block" class="left"></div>
       <div @mousedown="click_in_block('right')" @mouseup="up_in_block" class="right"></div>
+      <div @mousedown="click_in_block('right-top')" @mouseup="up_in_block" class="right-top"></div>
+      <div @mousedown="click_in_block('left-top')" @mouseup="up_in_block" class="left-top"></div>
       <div @mousedown="click_in_block('move')" @mouseup="up_in_block"  class="slot">
        <slot></slot>
       </div>
       <div @mousedown="click_in_block('down')" @mouseup="up_in_block" class="down"></div>
+      <div @mousedown="click_in_block('right-bottom')" @mouseup="up_in_block" class="right-bottom"></div>
+      <div @mousedown="click_in_block('left-bottom')" @mouseup="up_in_block" class="left-bottom"></div>
     </div>
 </template>
 
@@ -16,9 +20,11 @@ export default {
   data(){
     return{X: 0, Y: 0, height_block: 0, width_block: 0,direction: "", margin_bottom: 0, margin_left: 0, margin_right: 0, margin_top: 0,click: false}
   },
-  props:['id'],#f26b31
+  props:['id'],
   mounted() {
-    this.$el.setAttribute('id', 'block' + this.id)
+    console.log(this.id);
+    console.log(this.$props.id);
+    this.$el.setAttribute('id', 'block' + this.id);
   },
   methods:{
     click_on(){
@@ -28,15 +34,25 @@ export default {
         child[0].style.display = "block";
         child[1].style.display = "block";
         child[2].style.display = "block";
+        child[3].style.display = "block";
         child[4].style.display = "block";
-        child[3].style.cursor = "move";
+        child[6].style.display = "block";
+        child[7].style.display = "block";
+        child[8].style.display = "block";
+        child[9].style.display = "block";
+        child[5].style.cursor = "move";
       }else{
-          this.click = false;
+        this.click = false;
         child[0].style.display = "none";
         child[1].style.display = "none";
         child[2].style.display = "none";
+        child[3].style.display = "none";
         child[4].style.display = "none";
-        child[3].style.cursor = "default";
+        child[6].style.display = "none";
+        child[7].style.display = "none";
+        child[8].style.display = "none";
+        child[9].style.display = "none";
+        child[5].style.cursor = "default";
       }
     },
     click_in_block(e) {
@@ -98,6 +114,9 @@ export default {
               el.style.marginTop = Number(Number(this.margin_top) + Number(event.pageY - this.Y)) + 'px';
             }
           }
+          // case "left-top" :{
+          //
+          // }
         }
     },
   }
@@ -117,12 +136,61 @@ export default {
 .slot{
   width: 100%;
   height: 100%;
+  cursor: default;
+}
+.right-bottom{
+  background-color: white;
+  border-radius: 50%;
+  border: 2px solid rgb(40, 198, 246);
+  width: 10px;
+  z-index: 15;
+  display: none;
+  height: 10px;
+  position: absolute;
+  bottom: -5px;
+  right: -5px;
+}
+.left-bottom{
+  background-color: white;
+  border-radius: 50%;
+  border: 2px solid rgb(40, 198, 246);
+  width: 10px;
+  display: none;
+  z-index: 15;
+  height: 10px;
+  position: absolute;
+  bottom: -5px;
+  left: -5px;
+}
+.right-top{
+  background-color: white;
+  border-radius: 50%;
+  border: 2px solid rgb(40, 198, 246);
+  width: 10px;
+  display: none;
+  z-index: 15;
+  height: 10px;
+  position: absolute;
+  top: -5px;
+  right: -5px;
+}
+.left-top{
+  border-radius: 50%;
+  background-color: white;
+  border: 2px solid rgb(40, 198, 246);
+  width: 10px;
+  display: none;
+  z-index: 15;
+  height: 10px;
+  position: absolute;
+  top: -5px;
+  left: -5px;
 }
 .up{
   position: absolute;
   display: none;
   top: 0;
-  z-index: 9999;
+  z-index: 9;
   cursor: ns-resize;
   width: 100%;
   height: 3px;
@@ -133,8 +201,7 @@ export default {
   position: absolute;
   bottom: 0;
   display: none;
-  display: none;
-  z-index: 9999;
+  z-index: 9;
   cursor: ns-resize;
   width: 100%;
   height: 3px;
@@ -145,7 +212,7 @@ export default {
   cursor: ew-resize;
   width: 3px;
   display: none;
-  z-index: 9999;
+  z-index: 9;
   height: 100%;
   float: left;
   background-color: rgba(76, 255, 83, 1);
@@ -155,7 +222,7 @@ export default {
   cursor: ew-resize;
   width: 3px;
   display: none;
-  z-index: 9999;
+  z-index: 9;
   float: right;
   height: 100%;
   background-color: rgba(76, 255, 83, 1);

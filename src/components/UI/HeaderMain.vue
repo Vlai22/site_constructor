@@ -6,7 +6,7 @@
         <span>{{NameFile}}</span>
       </div>
       <div class="components __row">
-        <span @click="click_block('text')">Text<img src="@/assets/V.svg" alt="V"></span>
+        <span @click="click_block('Text_2_Component')">Text<img src="@/assets/V.svg" alt="V"></span>
         <span @click="click_block('image')">Image<img src="@/assets/V.svg" alt="V"></span>
         <span @click="click_block('forms')">Forms<img src="@/assets/V.svg" alt="V"></span>
         <span @click="click_block('blocks')">Blocks<img src="@/assets/V.svg" alt="V"></span>
@@ -26,6 +26,12 @@ export default {
   name: "HeaderMain",
   props :{
     NameFile : String,
+  },
+  methods:{
+    click_block(e){
+      this.$emit("click_create_component");
+      this.$emit("update:create_component", e);
+    }
   },
   data () {
     return{}

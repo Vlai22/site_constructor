@@ -1,31 +1,40 @@
 <template>
-  <header-main   v-bind="this.props"></header-main>
+  <header-main @update:create_component="this.create_component = $event" @click_create_component="create_components()" v-bind="this.props"></header-main>
   <div class="bars_position">
     <left-bar></left-bar>
     <WorkSpace :id="component.id" v-for="component in components" :key="component.id">
-      <component  v-for="element in component.elements" :key="element.id" :is="component.name">
-        <Resize_Block><component :is="element.name"></component></Resize_Block>
+      <component  :is="component.name">
+        <Resize_Block v-for="element in component.elements" :key="element.id"><component :id="element.id" :is="element.name"></component></Resize_Block>
       </component>
     </WorkSpace>
-    <RightBar></RightBar>
+    <RightBar>
+    </RightBar>
   </div>
 </template>
 
 <script>
 export default {
   name: 'App',
-  components: {},
-
   data () {
     return{ props:{NameFile:"Test"},
+      create_component: "",
       components:[
-        {id:1, name: "Section_Block", elements:[{id:1, name:"Text_1_Component"}],
+        {id: 1, name: "Section_Block", elements:[{id: 1, name:"Text_1_Component"}],
         }
       ],
     }
   },
   methods:{
-
+    create_components(){
+      for(let i=0;i<this.components.length;i++){
+        if(this.components[i].name == "Section_Block"){
+          let id = this.components[i].elements[this.components[i].elements.length - 1].id;
+          let object = {id: id + 1, name: this.create_component};
+          this.components[i].elements.push(object);
+          this.create_component = "";
+        }
+      }
+    }
   }
 }
 </script>
